@@ -1,5 +1,3 @@
-Payback
+Payback-Redux
 ===============
-
-# Payback
-# Debt managing application
+It's payback time, now with more caffeine.
