@@ -6,8 +6,6 @@ cookieParser = require('cookie-parser')
 session = require('express-session')
 sequelize = require('sequelize')
 
-passport = require('passport')
-
 orm = require('orm')
 database = require('./app/database')
 
@@ -44,17 +42,11 @@ server.use(express.static("#{__dirname}/../MobileClient/www"))
 
 server.use(session({secret: 'ilovekittiessomuch'}))
 
-require('./config/passport')(passport)
-
-server.use(passport.initialize())
-
-server.use(passport.session())
-
 require('./config/scheduler').start(schedule, fx)
 
 require('./config/jwtAuth.js')(server)
 
-require('./app/routes.js')(server, passport, fx, jwt)
+require('./app/routes.js')(server, fx, jwt)
 
 port = process.env.PORT or 1337
 
