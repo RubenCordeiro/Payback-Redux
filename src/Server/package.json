@@ -1,5 +1,5 @@
 {
-  "name": "PaybackServer",
+  "name": "PaybackServer-Redux",
   "version": "0.0.1",
   "description": "PaybackServer",
   "main": "server.js",
@@ -49,11 +49,13 @@
     "jwt-simple": "~0.2.0",
     "moment": "~2.6.0",
     "shortid": "2.0.0",
-    "lodash": "^2.4.1"
+    "lodash": "^2.4.1",
+     "coffee-script-redux": "^2.0.0-beta8",
+      "sequelize": "~1.7.9"
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/DDuarte/Payback.git"
+    "url": "https://github.com/SynapseR/Payback-Redux.git"
   },
   "engines": {
     "node": "0.10.x",
