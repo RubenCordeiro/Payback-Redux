@@ -6,10 +6,10 @@ Datastore = require('nedb')
 
 class Scheduler
 
-  @currencyApiUrl: 'http://api.fixer.io/latest'
+  currencyApiUrl: 'http://api.fixer.io/latest'
 
   # currency rates as of 2014-05-09
-  @defaultFx: {
+  defaultFx: {
     type: "rates",
     date: "2014-05-09",
     base: "EUR",
@@ -64,16 +64,16 @@ class Scheduler
             fx.rates = ratingsDocument.rates
             fx.base = ratingsDocument.base
           else
-            fx.rates = @defaultFx.rates
-            fx.base = @defaultFx.base
-            db.insert(defaultFx)
+            fx.rates = Scheduler::defaultFx.rates
+            fx.base = Scheduler::defaultFx.base
+            db.insert(Scheduler::defaultFx)
 
           return callback(null)
         )
       ,
       # action 2
       (callback) ->
-        request.get(@currencyApiUrl, (err, response, body) ->
+        request.get(Scheduler::currencyApiUrl, (err, response, body) ->
 
           if err then return callback(err)
 
@@ -96,7 +96,7 @@ class Scheduler
 
     # schedule conversion rates update (everyday at 5AM)
     scheduler.scheduleJob({hour: 5, minute: 0}, () ->
-      request.get(@currencyApiUrl, (err, response, body) ->
+      request.get(Scheduler::currencyApiUrl, (err, response, body) ->
 
         if err then return console.log(err)
 
