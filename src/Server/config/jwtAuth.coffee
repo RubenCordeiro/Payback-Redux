@@ -5,7 +5,7 @@ setup = (server) ->
 
   jwtTokenAuthenticator = (req, res, next) ->
     token = (req.body and req.body.access_token) or (req.query and req.query.access_token) or req.headers['x-access-token']
-    if not token then return res.json(400, {error: "Error parsing token"})
+    if not token then return res.json(401, {error: "Missing token"})
 
     try
       decoded = jwt.decode(token, server.get('jwtTokenSecret'))
