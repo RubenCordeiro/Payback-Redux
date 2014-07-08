@@ -1,10 +1,25 @@
 express = require('express')
+http = require('http')
 morgan = require('morgan')
 compress = require('compression')
 bodyParser = require('body-parser')
 cookieParser = require('cookie-parser')
 session = require('express-session')
 sequelize = require('sequelize')
+db = require('./models')
+
+# db
+#   .sequelize
+#   .sync({ force: true })
+#   .complete((err) ->
+#     if err
+#       throw err[0]
+#     else
+#       port = server.get('port')
+#       http.createServer(server).listen(port, () ->
+#         console.log("Express server listening on port #{port}")
+#       )
+#   )
 
 orm = require('orm')
 database = require('./app/database')
