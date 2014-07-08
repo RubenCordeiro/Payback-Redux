@@ -48,14 +48,14 @@ class Scheduler
       "ZAR": 14.278
   }}
 
-  @dbPath = "./config/currency.db"
+  dbPath = "./config/currency.db"
 
-  @start: (scheduler, fx) ->
+  start: (scheduler, fx) ->
 
     async.series([
       # action 1
       (callback) ->
-        db = new Datastore({filename: @dbPath, autoload: true})
+        db = new Datastore({filename: Scheduler::dbPath, autoload: true})
         db.findOne({type: "rates"}).sort({date: -1}).exec((err, ratingsDocument) ->
 
           if err then return callback(err)
@@ -111,7 +111,7 @@ class Scheduler
 
         currencies.type = "rates"
 
-        @db.update({type: "rates"}, currencies, {})
+        db.update({type: "rates"}, currencies, {})
       )
     )
 
