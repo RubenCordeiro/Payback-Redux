@@ -12,11 +12,18 @@ validCurrencies = [
 ]
 
 module.exports = (sequelize, DataTypes) ->
-  debt = sequelize.define('Debt', {
+  Debt = sequelize.define('Debt', {
     description: { type: DataTypes.STRING, required: false, defaultValue: "", validate: { max: 100 }},
     originalValue: { type: DataTypes.FLOAT, required: true },
     value: { type: DataTypes.FLOAT, required: true, validate: { min: 0 } },
     currency: { type: DataTypes.STRING, required: true, validate: { isIn: [validCurrencies]} }
-  })
-
-  return debt
+  },
+    {
+      classMethods: {
+        associate: (models) ->
+          Debt
+          .hasOne(models.User, {as: 'Creditor'})
+          .hasOne(models.User, {as: 'Debtor'})
+      }
+    })
+  return Debt
