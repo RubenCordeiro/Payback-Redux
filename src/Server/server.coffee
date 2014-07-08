@@ -42,7 +42,7 @@ server.use(express.static("#{__dirname}/../MobileClient/www"))
 
 server.use(session({secret: 'ilovekittiessomuch'}))
 
-require('./config/scheduler').start(schedule, fx)
+require('./config/scheduler')::start(schedule, fx)
 
 require('./config/jwtAuth.js')(server)
 
